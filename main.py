@@ -11,6 +11,12 @@ from pathlib import Path
 
 USERNAME = "xutep"
 
+# The gate allows 1 to 30 characters, not whitespace-only, and the judge
+# compares single words: enforce the entry's own contract before writing.
+assert 1 <= len(USERNAME) <= 30, "username must be 1-30 characters"
+assert USERNAME == USERNAME.strip(), "username must not be padded"
+assert " " not in USERNAME and "\n" not in USERNAME, "username must be one word"
+
 
 def main() -> None:
     output_path = Path(os.environ.get("OUTPUT_PATH", "/output/entry.txt"))
